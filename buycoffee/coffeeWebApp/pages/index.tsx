@@ -35,34 +35,9 @@ const Home: NextPage = () => {
     setHasMounted(true);
   }, []);
 
-  /* contract read operations */
-  const allCoffee = useContractRead({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "getAllCoffee",
-    watch: true,
-  });
+  /* TODO :contract read operations */
 
-  const coffeeCount = useContractRead({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "getTotalCoffee",
-    watch: true,
-  });
-
-  /* contract write  */
-  const { config } = usePrepareContractWrite({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "buyCoffee",
-    args: [message, name],
-    value: parseEther("0.01") as any,
-  });
-
-  const { data, write } = useContractWrite(config);
-  const { isLoading } = useWaitForTransaction({
-    hash: data?.hash,
-  });
+  /*  TODO: contract write  */
 
   /* check mounted to avoid hydration issues*/
   if (!hasMounted) return null;
@@ -99,13 +74,13 @@ const Home: NextPage = () => {
               <Heading mb={"20px"}>Buy a Coffee</Heading>
               <Flex direction={"row"}>
                 <Text>Total Coffees: </Text>
-                <Skeleton
+                {/* <Skeleton
                   isLoaded={!coffeeCount.isLoading}
                   width={"20px"}
                   ml={"5px"}
                 >
                   {coffeeCount.data?.toString()}
-                </Skeleton>
+                </Skeleton> */}
               </Flex>
               <Text fontSize={"2xl"} py={"10px"}>
                 Name:
@@ -134,17 +109,15 @@ const Home: NextPage = () => {
                       borderRadius: "8px",
                       padding: "16px",
                     }}
-                    disabled={!write}
                     onClick={() => {
-                      write?.();
-                      clearValues();
+                      // TODO : call write and clearvalues
                     }}
                   >
-                    {isLoading ? (
+                    {/* {isLoading ? (
                       <div>{"Sending"}</div>
                     ) : (
                       <div>{"Buy a coffee 0.01ETH"}</div>
-                    )}
+                    )} */}
                   </button>
                 ) : (
                   <Text>Please connect your wallet</Text>
@@ -157,10 +130,9 @@ const Home: NextPage = () => {
           <Card maxH={"60vh"} overflow={"scroll"}>
             <CardBody>
               <Text fontWeight={"bold"}>Recent Messages:</Text>
-              {!allCoffee.isLoading ? (
+              {/*
                 <Box>
-                  {(allCoffee.data as Array<Object>)
-                    ?.map((coffee: any, index: number) => {
+
                       return (
                         <Card key={index} my={"10px"}>
                           <CardBody>
@@ -169,16 +141,15 @@ const Home: NextPage = () => {
                           </CardBody>
                         </Card>
                       );
-                    })
-                    .reverse()}
+
                 </Box>
-              ) : (
-                <Stack>
-                  <Skeleton height={"100px"} />
-                  <Skeleton height={"100px"} />
-                  <Skeleton height={"100px"} />
-                </Stack>
-              )}
+              ) : ( */}
+              <Stack>
+                <Skeleton height={"100px"} />
+                <Skeleton height={"100px"} />
+                <Skeleton height={"100px"} />
+              </Stack>
+              {/* )} */}
             </CardBody>
           </Card>
         </Box>

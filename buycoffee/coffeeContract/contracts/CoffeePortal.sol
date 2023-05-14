@@ -9,12 +9,8 @@ contract CoffeePortal {
         owner = payable(msg.sender);
     }
 
-    event NewCoffee (
-        address indexed from,
-        uint256 timestamp,
-        string message,
-        string name
-    );
+    // TODO:  Add event params
+    event NewCoffee();
 
     struct Coffee {
         address sender;
@@ -23,28 +19,20 @@ contract CoffeePortal {
         uint256 timestamp;
     }
 
-    Coffee[] coffee;
+    // TODO: Declare Object array
 
     function getAllCoffee() public view returns (Coffee[] memory) {
-        return coffee;
-    }    
+        // TODO: return Array
+    }
 
     function getTotalCoffee() public view returns (uint256) {
-        return totalCoffee;
+        // TODO: return count variable
     }
 
     function buyCoffee(
         string memory _message,
         string memory _name
-    ) payable public {
-        require(msg.value == 0.01 ether, "You need to pay 0.01 ETH");
-
-        totalCoffee += 1;
-        coffee.push(Coffee(msg.sender, _message, _name, block.timestamp));
-
-        (bool success,) = owner.call{value: msg.value}("");
-        require(success, "Failed to send Ether to owner");
-
-        emit NewCoffee(msg.sender, block.timestamp, _message, _name);
+    ) public payable {
+        // TODO: implement buyCoffee logic
     }
 }

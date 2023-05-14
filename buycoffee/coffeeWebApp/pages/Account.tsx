@@ -8,12 +8,9 @@ import {
 import { useState, useEffect } from "react";
 
 export function Account() {
-  const { address, connector, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
-  const { disconnect } = useDisconnect();
   const [hasMounted, setHasMounted] = useState(false);
+
+  // TODO: Add useAccount, useConnect, useDisconnect hooks
 
   useEffect(() => {
     setHasMounted(true);
@@ -21,43 +18,43 @@ export function Account() {
 
   if (!hasMounted) return null;
 
-  if (isConnected) {
-    return (
+  // if (isConnected) {
+  return (
+    <div
+      style={{
+        backgroundColor: "indigo",
+        borderRadius: "30px",
+        padding: "12px",
+        margin: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <div
-        style={{
-          backgroundColor: "indigo",
-          borderRadius: "30px",
-          padding: "12px",
-          margin: "10px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        style={{ display: "flex", flexDirection: "row", paddingLeft: "8px" }}
       >
-        <div
-          style={{ display: "flex", flexDirection: "row", paddingLeft: "8px" }}
-        >
-          <div style={{ paddingRight: "20px", color: "white" }}>
-            {connector?.name}
-          </div>
-          <div style={{ paddingRight: "20px", color: "white" }}>
-            {address!.substring(0, 12) + "..."}
-          </div>
+        <div style={{ paddingRight: "20px", color: "white" }}>
+          {/* TODO : Display connecter name */}
         </div>
-
-        <button
-          style={{ paddingTop: "10px", color: "white", fontWeight: "bold" }}
-          onClick={() => disconnect()}
-        >
-          Disconnect
-        </button>
+        <div style={{ paddingRight: "20px", color: "white" }}>
+          {/* TODO : Display Address */}
+        </div>
       </div>
-    );
-  }
+
+      <button
+        style={{ paddingTop: "10px", color: "white", fontWeight: "bold" }}
+        // TODO: Call disconnect
+      >
+        Disconnect
+      </button>
+    </div>
+  );
+  // }
 
   return (
     <div>
-      {connectors.map((connector) => (
+      {/* {connectors.map((connector) => (
         <button
           disabled={!connector.ready}
           key={connector.id}
@@ -80,7 +77,7 @@ export function Account() {
         </button>
       ))}
 
-      {error && <div>{error.message}</div>}
+      {error && <div>{error.message}</div>} */}
     </div>
   );
 }
