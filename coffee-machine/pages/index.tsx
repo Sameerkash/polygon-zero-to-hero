@@ -31,37 +31,17 @@ export default function Coffee() {
   const handleNameChange = (e) => setName(e.target.value);
   const handlePriceChange = (e) => setPrice(Math.floor(e.target.value));
 
-  const coffeeCount = useContractRead({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "getTotalCoffee",
-    watch: true,
-  });
+  /*Add total cofee read contract call */
 
-  /* contract read operations */
-  const allCoffee = useContractRead({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "getAllCoffee",
-    watch: true,
-  });
+  /*Add All coffee read operation */
 
-  const { config } = usePrepareContractWrite({
-    address: contractAddress,
-    abi: CoffeeABI,
-    functionName: "buyCoffee",
-    args: [message, name],
-    value: parseEther("0.01") as any,
-  });
+  /*Prepare contract write operation*/
 
-  const { data, write } = useContractWrite(config);
-  const { isLoading } = useWaitForTransaction({
-    hash: data?.hash,
-  });
+  /*Write and watit for transaction*/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    write?.();
+    // write?.();
     setName("");
     setPrice(3);
     setMessage("");
@@ -103,9 +83,9 @@ export default function Coffee() {
             <ProfileCard profile={profile} />
             <Card>
               <div className="p-8">
-                <div className="font-semibold text-base text-zinc-800">
-                  Recent supporters{" "}
-                  {coffeeCount.data && `(${coffeeCount.data?.toString()})`}
+                {/* <div className="font-semibold text-base text-zinc-800"> */}
+                  {/* Recent supporters{" "} */}
+                  {/* {coffeeCount.data && `(${coffeeCount.data?.toString()})`}
                 </div>
                 {!allCoffee.isLoading && allCoffee.data != null ? (
                   <>
@@ -115,30 +95,14 @@ export default function Coffee() {
                           key={index}
                           className="flex border-b last:border-b-0 py-4 space-x-4 items-start"
                         >
-                          {/* <div className="text-4xl w-12 h-12 flex justify-center items-center">
-                          {([1, 3, 5].includes(tx.amount) && '☕️') || '🔥'}
-                        </div> */}
                           <div className="w-full">
                             <div className="flex items-center justify-between">
                               <div className=" text-sm text-zinc-600">
                                 <span className="font-semibold">
                                   {coffee.name || "Someone"}
                                 </span>{" "}
-                                bought{" "}
-                                {/* <span className="font-semibold">{coffee.amount}</span>{' '} */}
-                                coffee(s)
+                                bought coffee(s)
                               </div>
-                              {/* <NewTabLink
-                                // href={`${explorerUrl}/txid/${tx.id}`}
-                                className={`text-xs hover:underline cursor-pointer ${
-                                  allCoffee.status === 'loading'
-                                    ? 'text-orange-500'
-                                    : 'text-zinc-600'
-                                }`}
-                              >
-                                {coffee.status === 'success' ? '🚀' : '⌛'}{' '}
-                                {/* {truncateUrl(tx.id)} */}
-                              {/* </NewTabLink> */}
                             </div>
                             <div className="text-xs mt-1 text-zinc-600">
                               {coffee?.timestamp ? (
@@ -171,7 +135,7 @@ export default function Coffee() {
                   </>
                 ) : (
                   <div></div>
-                )}
+                )} */}
               </div>
             </Card>
           </div>
@@ -234,7 +198,7 @@ export default function Coffee() {
                     label="Message"
                   />
 
-                  {address ? (
+                  {/* {address ? (
                     <PrimaryButton type="submit">
                       {isLoading ? (
                         <div>{"Sending"}</div>
@@ -246,7 +210,7 @@ export default function Coffee() {
                     <SecondaryButton type="disable">
                       Please connect your wallet
                     </SecondaryButton>
-                  )}
+                  )} */}
                 </form>
               </div>
             </Card>

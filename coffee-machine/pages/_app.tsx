@@ -1,10 +1,10 @@
-import 'styles/globals.css';
+import "styles/globals.css";
 
-import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import type { AppProps } from 'next/app';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import type { AppProps } from "next/app";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import {
   arbitrum,
   goerli,
@@ -13,26 +13,27 @@ import {
   polygon,
   base,
   zora,
-  polygonMumbai
-} from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+  polygonMumbai,
+} from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [polygonMumbai],
+  /*add mumbai testnet */
+  [],
   [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
-  chains
+  appName: "RainbowKit App",
+  projectId: "YOUR_PROJECT_ID",
+  chains,
 });
 
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
   publicClient,
-  webSocketPublicClient
+  webSocketPublicClient,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

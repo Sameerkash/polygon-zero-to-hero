@@ -2,49 +2,39 @@
 pragma solidity ^0.8.9;
 
 contract CoffeePortal {
-    uint256 totalCoffee;
-    address payable public owner;
+    /*Declate totalCoffees */
+
+    /*Declate owner */
 
     constructor() payable {
-        owner = payable(msg.sender);
+        // owner = payable(msg.sender);
     }
 
-    event NewCoffee (
-        address indexed from,
-        uint256 timestamp,
-        string message,
-        string name
-    );
+    /*Create an event named NewCoffee with Params */
 
-    struct Coffee {
-        address sender;
-        string message;
-        string name;
-        uint256 timestamp;
+    /*Declare Struct with sender, message, name, timestamp */
+
+    /*array to maintian coffee state */
+
+    function getAllCoffee() public view {
+        /*add a return type and return the entire array*/
     }
-
-    Coffee[] coffee;
-
-    function getAllCoffee() public view returns (Coffee[] memory) {
-        return coffee;
-    }    
 
     function getTotalCoffee() public view returns (uint256) {
-        return totalCoffee;
+        /*Return total count*/
     }
 
     function buyCoffee(
         string memory _message,
         string memory _name
-    ) payable public {
+    ) public payable {
         require(msg.value == 0.01 ether, "You need to pay 0.01 ETH");
 
-        totalCoffee += 1;
-        coffee.push(Coffee(msg.sender, _message, _name, block.timestamp));
+        /*Increment count + Push to array  */
 
-        (bool success,) = owner.call{value: msg.value}("");
-        require(success, "Failed to send Ether to owner");
+        // (bool success, ) = owner.call{value: msg.value}("");
+        // require(success, "Failed to send Ether to owner");
 
-        emit NewCoffee(msg.sender, block.timestamp, _message, _name);
+        // emit NewCoffee(msg.sender, block.timestamp, _message, _name);
     }
 }
