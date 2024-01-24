@@ -21,6 +21,6 @@ export const appDetails = {
   icon: 'https://assets.website-files.com/618b0aafa4afde65f2fe38fe/618b0aafa4afde2ae1fe3a1f_icon-isotipo.svg'
 };
 
-export const contractAddress = '0x20DfE658B5b473868B33D1096dd48ea9a92873bB';
+export const contractAddress = '0xd6377B3151D0600d482eCE081D5Ada8fda6620ce';
 
 export const CoffeeABI = abi.abi;

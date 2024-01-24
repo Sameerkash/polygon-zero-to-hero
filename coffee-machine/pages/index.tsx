@@ -31,9 +31,6 @@ export default function Coffee() {
   const handleNameChange = (e) => setName(e.target.value);
   const handlePriceChange = (e) => setPrice(Math.floor(e.target.value));
 
-  // Fetching number of supporters
-  // - This method fetches the number of supporters from the contract address.
-  // - We parse the response to get the number of supporters.
   const coffeeCount = useContractRead({
     address: contractAddress,
     abi: CoffeeABI,
@@ -53,7 +50,7 @@ export default function Coffee() {
     address: contractAddress,
     abi: CoffeeABI,
     functionName: "buyCoffee",
-    args: [message, name, price],
+    args: [message, name],
     value: parseEther("0.01") as any,
   });
 
@@ -73,7 +70,7 @@ export default function Coffee() {
   if (!mounted) return null;
 
   return (
-    <div className="bg-gradient-to-r from-purple-300 via-yellow-200 to-violet-400 w-full">
+    <div className="bg-gradient-to-r from-purple-300 via-yellow-200 to-violet-400 w-full pb-10">
       <AppNavbar />
       <Container>
         <div className="mx-auto mt-8">
@@ -83,19 +80,19 @@ export default function Coffee() {
           <div className="mt-2 text-sm text-gray-500 max-w-2xl">
             This is a demo app on how to build an simple dapp with solidity {""}
             <span className="text-blue-600 font-semibold hover:underline cursor-pointer">
-              <NewTabLink href="https://explorer.stacks.co/sandbox/deploy?chain=testnet">
+              <NewTabLink href="https://faucet.polygon.technology/">
                 faucet
               </NewTabLink>
             </span>{" "}
             to try out the app. Contracts are deployed on{" "}
             <span className="text-blue-600 font-semibold hover:underline cursor-pointer">
-              <NewTabLink href="https://explorer.stacks.co/txid/ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.coffee?chain=testnet">
+              <NewTabLink href="https://mumbai.polygonscan.com/address/0x5FbDB2315678afecb367f032d93F642f64180aa3">
                 testnet
               </NewTabLink>
             </span>
             . You can find a source code on{" "}
             <span className="text-gray-800 font-semibold hover:underline cursor-pointer">
-              <NewTabLink href="https://github.com/tuanphungcz/buy-me-a-coffee-with-stacks">
+              <NewTabLink href="https://github.com/Sameerkash/polygon-zero-to-hero/tree/main/coffee-machine">
                 Github
               </NewTabLink>
             </span>
@@ -110,7 +107,7 @@ export default function Coffee() {
                   Recent supporters{" "}
                   {coffeeCount.data && `(${coffeeCount.data?.toString()})`}
                 </div>
-                {!allCoffee.isLoading ? (
+                {!allCoffee.isLoading && allCoffee.data != null ? (
                   <>
                     {(allCoffee.data as Array<Object>)
                       .map((coffee: any, index: number) => (
